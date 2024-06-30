@@ -8,3 +8,5 @@ def get_mask_account(mask_account):
     """Функция маскировки номера счета в формате **4305"""
     str_mask_account = str(mask_account)
     return f"**{str_mask_account[-4:]}"
+
+#fhdkjsksd
