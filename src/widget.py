@@ -12,15 +12,7 @@ def mask_account_card(input_str: str) -> str | None:
         return None
 
 
-print(mask_account_card('Visa Platinum 7000792289606361'))
-print(mask_account_card('Maestro 7000792289606361'))
-print(mask_account_card('Счет 73654108430135874305'))
-
-
 def get_date(inf_data: str) -> str:
     """ Преобразование даты """
     data_split = inf_data.split('T')[0]
     return f"{data_split.split('-')[-1]}.{data_split.split('-')[-2]}.{data_split.split('-')[-3]}"
-
-
-print(get_date('2024-03-11T02:26:18.671407'))
