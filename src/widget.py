@@ -16,3 +16,7 @@ def get_date(inf_data: str) -> str:
     """ Преобразование даты """
     data_split = inf_data.split('T')[0]
     return f"{data_split.split('-')[-1]}.{data_split.split('-')[-2]}.{data_split.split('-')[-3]}"
+
+
+def src():
+    return None
