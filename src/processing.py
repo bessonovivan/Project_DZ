@@ -1,31 +1,27 @@
-# from typing import List, Dict, Any
-#
-#
-# def filter_by_state(data: List[Dict[str, Any]], state: str = 'EXECUTED') -> List[Dict[str, Any]]:
-#     """Функция возвращает новый список словарей, у которых ключ state = EXECUTED"""
-#     return [d for d in data if d.get('state') == state]
-#
-#
-# def sort_by_date(date_list: list, reverse_list: bool = True) -> list | bool:
-#     """Функция возвращает новый список, отсортированный по дате """
-#     sorted_list = sorted(date_list, key=lambda date_dict: date_dict.get("date"), reverse=reverse_list)
-#     return sorted_list
-#
+import datetime
+from typing import Union
 from typing import Dict, List
 
 
-def filter_by_state(last_dict: List[Dict], value_key: str = "EXECUTED") -> List[Dict]:
-    """Принимает список словарей и ключ: state (по умолчанию 'EXECUTED').
-    Возвращает новый список словарей, содержащий словари соответствующих ключ"""
-    new_list_dict = []
-    for i in range(len(last_dict)):
-        if last_dict[i].get("state") == value_key:
-            new_list_dict.append(last_dict[i])
-    return new_list_dict
+def filter_by_state(dictionary_list: Union[list, dict], state: str = "EXECUTED") -> Union[list, dict]:
+    """Функция возвращающая из списка словарей список,
+    в которых ключ state равен определённому пользавателем значению"""
+    sorted_dictionary_list = list()
+    for user_dictionary in dictionary_list:
+        if user_dictionary.get("state") == state:
+            sorted_dictionary_list.append(user_dictionary)
+    return sorted_dictionary_list
 
 
-def sort_by_date(list_dict: List[Dict], arg_for_sort: bool = True) -> List[Dict]:
-    """Принимает список словарей и параметр сортировки(по умолчанию "True" — 'CANCELED').
-    Функция возвращает новый список, отсортированный по дате(date)"""
-    sort_list = sorted(list_dict, key=lambda every_dict: every_dict["date"], reverse=arg_for_sort)
-    return sort_list
+def sort_by_date(list_of_dictionary: Union[list, dict], sort_sequence: bool = True) -> Union[list, dict]:
+    """Функция, сортирующая список словарей по дате"""
+    list_with_date = list()
+    for my_dictionary in list_of_dictionary:
+        if "date" in my_dictionary.keys():
+            list_with_date.append(my_dictionary)
+    sorted_of_date_list = sorted(
+        list_with_date,
+        key=lambda x: datetime.datetime.strptime(x.get("date"), "%Y-%m-%dT%H:%M:%S.%f"),
+        reverse=sort_sequence,
+    )
+    return sorted_of_date_list
