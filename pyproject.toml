@@ -7,9 +7,11 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+form = "^0.0.1"
 
 
 [tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
 
 
 [tool.poetry.group.lint.dependencies]
