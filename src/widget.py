@@ -1,21 +1,24 @@
 from src.masks import get_mask_card_number, get_mask_account
 
 
-def mask_account_card(input_str: str) -> str | None:
-    """Функция  которая умеет обрабатывать информацию как о картах, так и о счетах"""
-    if ('Visa' in input_str) or ('Maestro' in input_str):
-        return f"{input_str[:-17]} {get_mask_card_number(input_str)}"
-    elif 'Счет' in input_str:
-        return f"Счет {get_mask_account(input_str)}"
-    else:
-        return None
+def mask_account_card(to_mask: str) -> str:
+    """Функция принимает на вход номер карты, счёта и возвращает её маску"""
+    if len(to_mask.split()[-1]) == 16:
+        new_card = get_mask_card_number(to_mask.split()[-1])
+        result = f"{to_mask[:-16]}{new_card}"
+    elif len(to_mask.split()[-1]) == 20:
+        new_card = get_mask_account(to_mask.split()[-1])
+        result = f"{to_mask[:-20]}{new_card}"
+    elif len(get_mask_card_number(to_mask.split()[-1])) != 16:
+        raise IndexError("Не соответствует длина строки номера карты")
+    elif len(get_mask_account(to_mask.split()[-1])) != 20:
+        raise IndexError("Не соответствует длина строки номера счёта")
+    return result
 
 
-def get_date(inf_data: str) -> str:
-    """ Преобразование даты """
-    data_split = inf_data.split('T')[0]
-    return f"{data_split.split('-')[-1]}.{data_split.split('-')[-2]}.{data_split.split('-')[-3]}"
-
-
-def src():
-    return None
+def get_new_data(old_data: str) -> str:
+    """Функция принимает строку и возвращает в формате ДД.ММ.ГГГГ"""
+    if old_data == "":
+        raise TypeError("Отсутствует обязательный аргумент")
+    data_slize = old_data[0:10].split("-")
+    return ".".join(data_slize[::-1])

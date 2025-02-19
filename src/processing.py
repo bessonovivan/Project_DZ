@@ -1,16 +1,17 @@
 import datetime
+
 from typing import Union
 from typing import Dict, List
 
 
-def filter_by_state(dictionary_list: Union[list, dict], state: str = "EXECUTED") -> Union[list, dict]:
-    """Функция возвращающая из списка словарей список,
-    в которых ключ state равен определённому пользавателем значению"""
-    sorted_dictionary_list = list()
-    for user_dictionary in dictionary_list:
-        if user_dictionary.get("state") == state:
-            sorted_dictionary_list.append(user_dictionary)
-    return sorted_dictionary_list
+def filter_by_state(last_dict: List[Dict], value_key: str = "EXECUTED") -> List[Dict]:
+    """Принимает список словарей и ключ: state (по умолчанию 'EXECUTED').
+    Возвращает новый список словарей, содержащий словари соответствующих ключ"""
+    new_list_dict = []
+    for i in range(len(last_dict)):
+        if last_dict[i].get("state") == value_key:
+            new_list_dict.append(last_dict[i])
+    return new_list_dict
 
 
 def sort_by_date(list_of_dictionary: Union[list, dict], sort_sequence: bool = True) -> Union[list, dict]:

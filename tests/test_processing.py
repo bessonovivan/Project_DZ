@@ -1,5 +1,6 @@
 import pytest
-# from typing import Dict, List, last_dict, filter_by_state, expected
+
+from typing import Dict, List
 from src.processing import filter_by_state, sort_by_date
 
 
@@ -85,36 +86,8 @@ def test_sort_by_date(user_list, user_sort_sequence, expected):
     assert sort_by_date(user_list, user_sort_sequence) == expected
 
 
-# def filter_by_state(dictionary_list: Union[list, dict], state: str = "EXECUTED") -> Union[list, dict]:
-#     """Функция возвращающая из списка словарей список,
-#     в которых ключ state равен определённому пользавателем значению"""
-#     sorted_dictionary_list = list()
-#     for user_dictionary in dictionary_list:
-#         if user_dictionary.get("state") == state:
-#             sorted_dictionary_list.append(user_dictionary)
-#     return sorted_dictionary_list
-# def test_filter_by_state(last_dict: List[Dict]) -> None:
-#     assert filter_by_state(last_dict, "EXECUTED") == [
-#         {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
-#         {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
-#     ]
-# @pytest.mark.parametrize(
-#     "last_dict, filter_by_state, expected",
-#     [
-#         (
-#             [
-#                 {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
-#                 {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
-#             ],
-#             True,
-#         ),
-#         (
-#             [
-#                 {'date': '2018-06-30T02:08:58.425572', 'id': 594226727, 'state': 'CANCELED'},
-#             ],
-#             False,
-#         ),
-#     ],
-# )
-# def test_filter_by_state(last_dict, filter_by_state, expected):
-#     assert filter_by_state(last_dict, filter_by_state) == expected
+def test_filter_by_state(last_dict: List[Dict]) -> None:
+    assert filter_by_state(last_dict, "EXECUTED") == [
+        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
+        {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
+    ]
