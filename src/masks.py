@@ -1,5 +1,7 @@
 def get_mask_card_number(card_number:str) -> str:
     """Функция маскировки номера карты d ajhvfnt 7000 79** **** 6361"""
+    if len(card_number) != 16:
+        return "Неправильно задан номер карты  16 цифр"
     str_card_number = str(card_number)[-16:]
     return f"{str_card_number[:4]} {str_card_number[4:6]}** **** {str_card_number[-4:]}"
 
